@@ -4,5 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // 重要：設定相對路徑，讓 GitHub Pages 能正確讀取資源
+  base: './', // 設定相對路徑
+  build: {
+    outDir: 'docs', // 將打包輸出位置改為 docs 資料夾
+  }
 })
