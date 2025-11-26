@@ -16,6 +16,7 @@
                 muted: '#8C8C8C', // Light Grey
                 gold: '#C5A065', // Muted Gold
                 cream: '#F5F0EB', // Light Cream
+                milktea: '#A89078', // Milk Tea
               }
             },
             fontFamily: {
@@ -27,7 +28,7 @@
       }
     </script>
     <style>
-      /* Custom scrollbar for a cleaner look */
+      /* Custom scrollbar */
       ::-webkit-scrollbar {
         width: 6px;
       }
@@ -41,6 +42,7 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #C5A065; 
       }
+
       .fade-in {
         animation: fadeIn 1s ease-in-out;
       }
@@ -48,20 +50,27 @@
         from { opacity: 0; }
         to { opacity: 1; }
       }
+      
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6"
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
 </head>
   <body class="bg-brand-bg text-brand-text antialiased">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
