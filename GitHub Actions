@@ -39,4 +39,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs  # 這裡指定要發佈的資料夾，與 vite.config.js 的 outDir 一致
+          jekyll: false # <-- 【修正點】明確告知不要運行 Jekyll
           cname: moan.to.accessories # (可選) 如果您有自訂網域名稱請填寫，若無請刪除此行
