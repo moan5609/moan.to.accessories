@@ -1,0 +1,42 @@
+name: Deploy to GitHub Pages
+
+# 設置觸發條件：當推送到 main 分支時執行
+on:
+  push:
+    branches:
+      - main
+  # 允許手動從 Actions 頁面觸發部署
+  workflow_dispatch:
+
+# 設置環境變量，用來指定 Node.js 版本
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      # 執行 Vite 的建構指令。它會執行您 package.json 裡的 "build" 腳本，並產生 docs 資料夾。
+      - name: Build project
+        run: npm run build
+
+      # 將建構好的 docs 資料夾內容發佈到 GitHub Pages 服務
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs  # 這裡指定要發佈的資料夾，與 vite.config.js 的 outDir 一致
+          cname: moan.to.accessories # (可選) 如果您有自訂網域名稱請填寫，若無請刪除此行
