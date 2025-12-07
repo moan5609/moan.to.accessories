@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Menu, X, Search } from 'lucide-react';
-import { BRAND_NAME } from '../constants';
+import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   cartCount: number;
@@ -9,23 +8,10 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location]);
-
+  // Navigation Links
   const navLinks = [
     { path: '/', label: '首頁 Home' },
     { path: '/shop', label: '商城 Shop' },
@@ -33,97 +19,75 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
     { path: '/faq', label: '資訊 Info' },
   ];
 
-  // Determine styles based on location and scroll state
-  const isHomePage = location.pathname === '/';
-  
-  // Logic: On Home page, if not scrolled and mobile menu closed, transparent bg + white text.
-  // Otherwise: background color + brand text color.
-  const isTransparent = isHomePage && !isScrolled && !isMobileMenuOpen;
-
-  // Text colors - Force WHITE when transparent to prevent "eating" by background
-  const textColorClass = isTransparent ? 'text-white' : 'text-brand-milktea';
-  const logoColorClass = isTransparent ? 'text-white' : 'text-brand-gold';
-  // Active link: White underline when transparent, Dark underline when scrolled
-  const activeLinkClass = isTransparent ? 'text-white border-b border-white' : 'text-brand-text border-b border-brand-text';
-  // Hover: White opacity when transparent, Gold when scrolled
-  const hoverColorClass = isTransparent ? 'hover:text-white/70' : 'hover:text-brand-gold';
-  const iconColorClass = isTransparent ? 'text-white' : 'text-brand-text';
-
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 border-b ${
-        isScrolled || isMobileMenuOpen
-          ? 'bg-brand-bg/95 backdrop-blur-md border-brand-muted/20 py-3 shadow-sm'
-          : 'bg-transparent border-transparent py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`${iconColorClass} ${hoverColorClass} transition-colors`}
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+    <>
+      {/* Fixed Header - Black/Transparent Style */}
+      <header className="fixed top-0 inset-x-0 z-30 bg-black/40 backdrop-blur-md text-white border-b border-white/10 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link to="/" className="font-serif text-xl md:text-2xl tracking-[0.25em] hover:opacity-80 transition-opacity z-40 relative">
+            Mo&An
+          </Link>
 
-          {/* Logo - Text Mo&An */}
-          <div className="flex-1 md:flex-none flex justify-center md:justify-start">
-            <Link to="/" className="block hover:opacity-80 transition-opacity">
-              <h1 className={`font-serif text-3xl md:text-4xl tracking-tighter transition-colors duration-300 ${logoColorClass}`}>
-                {BRAND_NAME}
-              </h1>
-            </Link>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-10 items-center">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex gap-8 text-xs md:text-sm tracking-widest">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm tracking-widest transition-all duration-300 font-medium pb-1 border-b border-transparent ${
-                  location.pathname === link.path ? activeLinkClass : textColorClass
-                } ${hoverColorClass}`}
+                className={`pb-1 border-b transition-all duration-300 ${
+                  location.pathname === link.path 
+                    ? 'border-white text-white' 
+                    : 'border-transparent text-white/80 hover:text-white hover:border-white/50'
+                }`}
               >
                 {link.label}
               </Link>
             ))}
-          </div>
+          </nav>
 
           {/* Icons */}
-          <div className={`flex items-center space-x-4 md:space-x-6 ${iconColorClass}`}>
-            <button className={`${hoverColorClass} transition-colors hidden sm:block`}>
-              <Search size={20} />
+          <div className="flex items-center gap-5 text-sm z-40 relative">
+            <button className="hover:text-brand-gold transition-colors hidden sm:block">
+              <Search size={18} />
             </button>
             <button 
               onClick={onCartClick}
-              className={`relative cursor-pointer ${hoverColorClass} transition-colors`}
+              className="hover:text-brand-gold transition-colors flex items-center gap-1"
             >
-              <ShoppingBag size={20} strokeWidth={1.5} />
-              {cartCount > 0 && (
-                <span className={`absolute -top-1 -right-1 text-[10px] w-4 h-4 rounded-full flex items-center justify-center ${isTransparent ? 'bg-white text-brand-text' : 'bg-brand-gold text-white'}`}>
-                  {cartCount}
-                </span>
-              )}
+              <div className="relative">
+                <ShoppingBag size={18} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 bg-brand-gold text-white text-[9px] flex items-center justify-center rounded-full">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+            </button>
+            
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="md:hidden hover:text-brand-gold transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-brand-bg border-t border-brand-muted/10 shadow-lg h-screen fade-in">
-          <div className="flex flex-col p-6 space-y-6">
+        <div className="fixed inset-0 z-20 bg-black/95 backdrop-blur-xl flex items-center justify-center md:hidden fade-in">
+          <div className="flex flex-col items-center space-y-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-lg font-serif tracking-widest border-b border-brand-muted/10 pb-2 ${
-                  location.pathname === link.path ? 'text-brand-text' : 'text-brand-milktea'
+                className={`text-lg font-serif tracking-[0.2em] uppercase ${
+                  location.pathname === link.path ? 'text-brand-gold' : 'text-white/80'
                 }`}
               >
                 {link.label}
@@ -132,7 +96,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

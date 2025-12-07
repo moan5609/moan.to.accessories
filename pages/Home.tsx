@@ -1,103 +1,63 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PRODUCTS, BRAND_NAME } from '../constants';
-import ProductCard from '../components/ProductCard';
-import { ArrowRight } from 'lucide-react';
 
 const Home: React.FC = () => {
-  const newArrivals = PRODUCTS.filter(p => p.isNew).slice(0, 3);
-  
   return (
     <div className="fade-in">
       {/* Hero Section */}
-      <section className="relative h-[90vh] w-full overflow-hidden">
-        {/* Background Image - Jewelry Lifestyle Texture */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1920&auto=format&fit=crop" 
-            alt="MO&AN Atmosphere - Gold and Texture" 
-            className="w-full h-full object-cover object-center"
+            alt="Hero Background" 
+            className="w-full h-full object-cover brightness-75"
           />
-          {/* Darker Gradient Overlay to ensure white text pops */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-black/30"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-brand-bg/60"></div>
         </div>
 
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4 z-10">
-          <div className="mb-6 drop-shadow-md">
-             <h1 className="font-serif text-6xl md:text-8xl text-white tracking-tighter drop-shadow-lg">
-               {BRAND_NAME}
-             </h1>
-          </div>
-          <p className="text-white text-sm md:text-base tracking-[0.2em] font-medium mb-10 max-w-md leading-loose drop-shadow-md text-shadow">
-            讓每個瞬間<br/>都成為另一個溫柔
+        {/* Content */}
+        <div className="relative z-10 text-center text-white px-4 mt-16">
+          <h1 className="font-serif text-5xl md:text-7xl mb-6 text-shadow tracking-tight">
+            Mo&An
+          </h1>
+          <p className="tracking-[0.3em] text-xs md:text-sm mb-6 text-white/90 font-light">
+            MOMENT & ANOTHER
           </p>
-          <Link 
-            to="/shop" 
-            className="inline-block bg-white/10 backdrop-blur-sm border border-white text-white px-10 py-3 text-xs tracking-[0.25em] hover:bg-white hover:text-brand-text transition-all duration-500 shadow-sm"
-          >
-            EXPLORE
-          </Link>
-        </div>
-      </section>
-
-      {/* Introduction / Mood */}
-      <section className="py-24 md:py-32 bg-brand-bg">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <span className="block text-brand-gold text-xs tracking-widest mb-6">PHILOSOPHY</span>
-          <h2 className="font-serif text-2xl md:text-3xl text-brand-text mb-8 leading-relaxed">
-            不是華麗的珠寶，<br/>是生活裡的呼吸。
-          </h2>
-          <p className="text-brand-milktea font-light leading-loose text-sm md:text-base">
-            我們相信飾品不該是束縛，而是日常的陪伴。<br/>
-            在忙碌的日子裡，低頭看見指尖的光澤，<br/>
-            希望能給你帶來片刻的寧靜。
+          <div className="w-[1px] h-12 bg-white/30 mx-auto mb-6"></div>
+          <p className="text-sm md:text-base mb-12 leading-relaxed tracking-widest font-light text-shadow">
+            讓每個瞬間，<br className="md:hidden" />
+            都成為另一個溫柔。
           </p>
-        </div>
-      </section>
-
-      {/* New Arrivals */}
-      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-12 border-b border-brand-muted/10 pb-4">
-          <h2 className="font-serif text-xl tracking-widest text-brand-text">NEW ARRIVALS</h2>
-          <Link to="/shop" className="text-xs text-brand-milktea hover:text-brand-gold flex items-center gap-1 transition-colors">
-            VIEW ALL <ArrowRight size={12} />
-          </Link>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
-          {newArrivals.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
-
-      {/* Visual Story Split Section */}
-      <section className="py-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-auto md:h-[600px]">
-          <div className="relative h-[400px] md:h-full bg-brand-muted/10 overflow-hidden">
-             <img 
-              src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=800&auto=format&fit=crop" 
-              alt="Lifestyle" 
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-            />
-          </div>
-          <div className="flex flex-col justify-center items-center text-center p-12 md:p-24 bg-brand-cream">
-            <h3 className="font-serif text-2xl text-brand-text mb-6 tracking-widest">
-              剛剛好的美感
-            </h3>
-            <p className="text-brand-milktea font-light leading-loose text-sm mb-8 max-w-xs">
-              不張揚，不喧嘩。<br/>
-              就像午後三點的陽光，<br/>
-              溫暖而舒適。<br/>
-              {BRAND_NAME} 陪伴你度過每一個日常瞬間。
-            </p>
-            <Link to="/about" className="text-xs border-b border-brand-milktea text-brand-milktea pb-1 hover:text-brand-gold hover:border-brand-gold transition-colors tracking-widest">
-              READ OUR STORY
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/shop"
+              className="inline-flex items-center justify-center px-10 py-3 border border-white/70 text-xs tracking-[0.25em] uppercase hover:bg-white hover:text-brand-text transition-all duration-300"
+            >
+              Explore
+            </Link>
+            <Link
+              to="/about"
+              className="inline-flex items-center justify-center px-10 py-3 border border-transparent text-xs tracking-[0.25em] uppercase bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+            >
+              About
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Philosophy Section (Keeping a small part of original design to bridge content) */}
+      <section className="py-24 bg-brand-bg text-center px-6">
+        <p className="text-brand-gold text-xs tracking-widest mb-4">PHILOSOPHY</p>
+        <h2 className="font-serif text-2xl text-brand-text mb-8 tracking-widest">
+          不只是飾品，是生活的註腳
+        </h2>
+        <p className="text-brand-muted text-sm font-light leading-loose max-w-xl mx-auto">
+          在平凡的日子裡，<br/>
+          尋找那些微微發光的片刻。
+        </p>
       </section>
     </div>
   );
