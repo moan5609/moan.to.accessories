@@ -25,7 +25,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 }) => {
   const [copied, setCopied] = useState(false);
   
-  // Hydrate cart items
+  // 還原購物車商品詳細資料
   const hydratedItems = useMemo(() => {
     return cartItems.map(item => {
       const product = PRODUCTS.find(p => p.id === item.productId);
@@ -35,7 +35,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
   const totalAmount = hydratedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  // Generate order text
+  // 產生訂單文字
   const orderSummaryText = useMemo(() => {
     if (hydratedItems.length === 0) return '';
     const itemsList = hydratedItems.map((item, index) => 
@@ -53,7 +53,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
   return (
     <>
-      {/* Overlay */}
+      {/* 遮罩 */}
       <div 
         className={`fixed inset-0 bg-black/40 backdrop-blur-[1px] z-40 transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -61,12 +61,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
         onClick={onClose}
       />
 
-      {/* Sliding Panel */}
+      {/* 滑出面板 */}
       <div className={`fixed top-0 right-0 h-full w-full max-w-[420px] bg-brand-bg z-50 shadow-2xl transform transition-transform duration-500 ease-out flex flex-col ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         
-        {/* Header */}
+        {/* 標題 */}
         <div className="flex justify-between items-center px-6 py-4 border-b border-brand-text/10 bg-brand-bg">
           <h2 className="text-sm font-bold tracking-[0.15em] uppercase text-brand-text">
             購物車 Cart
@@ -76,7 +76,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
           </button>
         </div>
 
-        {/* Body */}
+        {/* 內容區 */}
         <div className="flex-1 overflow-y-auto p-6">
           {hydratedItems.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-brand-muted space-y-2 opacity-60">
@@ -113,13 +113,13 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {hydratedItems.length > 0 && (
             <div className="border-t border-brand-text/10 pt-4">
-              {/* Total */}
+              {/* 總金額 */}
               <div className="flex justify-between items-center mb-6 text-sm">
                 <span className="text-brand-text tracking-widest">總金額 Total</span>
                 <strong className="text-brand-gold font-serif text-lg">NT$ {totalAmount.toLocaleString()}</strong>
               </div>
 
-              {/* Step 1 */}
+              {/* STEP 1 */}
               <div className="mb-6">
                 <h3 className="text-xs font-bold text-brand-text mb-2 tracking-widest">STEP 1. 複製訂單資訊</h3>
                 <textarea 
@@ -139,7 +139,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({
                 </button>
               </div>
 
-              {/* Step 2 */}
+              {/* STEP 2 */}
               <div>
                 <h3 className="text-xs font-bold text-brand-text mb-2 tracking-widest">STEP 2. 填寫訂購單</h3>
                 <p className="text-[10px] text-brand-muted mb-3 leading-relaxed">

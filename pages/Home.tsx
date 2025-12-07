@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
   return (
     <div className="fade-in">
-      {/* Hero Section */}
+      {/* Hero Section：全螢幕背景圖 */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* 背景圖片 */}
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1920&auto=format&fit=crop" 
             alt="Hero Background" 
             className="w-full h-full object-cover brightness-75"
           />
-          {/* Overlay */}
+          {/* 黑色遮罩 */}
           <div className="absolute inset-0 bg-black/30"></div>
         </div>
 
-        {/* Content */}
+        {/* 文字內容 */}
         <div className="relative z-10 text-center text-white px-4 mt-16">
           <h1 className="font-serif text-5xl md:text-7xl mb-6 text-shadow tracking-tight">
             Mo&An
@@ -48,7 +48,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Philosophy Section (Keeping a small part of original design to bridge content) */}
+      {/* 品牌理念簡述 */}
       <section className="py-24 bg-brand-bg text-center px-6">
         <p className="text-brand-gold text-xs tracking-widest mb-4">PHILOSOPHY</p>
         <h2 className="font-serif text-2xl text-brand-text mb-8 tracking-widest">

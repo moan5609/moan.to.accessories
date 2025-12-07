@@ -11,7 +11,6 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Navigation Links
   const navLinks = [
     { path: '/', label: '首頁 Home' },
     { path: '/shop', label: '商城 Shop' },
@@ -21,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
 
   return (
     <>
-      {/* Fixed Header - Black/Transparent Style */}
+      {/* 導覽列：黑色半透明風格 (bg-black/40) */}
       <header className="fixed top-0 inset-x-0 z-30 bg-black/40 backdrop-blur-md text-white border-b border-white/10 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           
@@ -30,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             Mo&An
           </Link>
 
-          {/* Desktop Nav */}
+          {/* 電腦版選單 */}
           <nav className="hidden md:flex gap-8 text-xs md:text-sm tracking-widest">
             {navLinks.map((link) => (
               <Link
@@ -47,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
             ))}
           </nav>
 
-          {/* Icons */}
+          {/* 圖示區 */}
           <div className="flex items-center gap-5 text-sm z-40 relative">
             <button className="hover:text-brand-gold transition-colors hidden sm:block">
               <Search size={18} />
@@ -66,7 +65,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
               </div>
             </button>
             
-            {/* Mobile Menu Toggle */}
+            {/* 手機版選單按鈕 */}
             <button 
               className="md:hidden hover:text-brand-gold transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -77,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount, onCartClick }) => {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
+      {/* 手機版全螢幕選單 */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-20 bg-black/95 backdrop-blur-xl flex items-center justify-center md:hidden fade-in">
           <div className="flex flex-col items-center space-y-8">
