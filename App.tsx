@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -18,6 +18,11 @@ interface CartItemState {
 const App: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItemState[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // 用於確認版本更新
+  useEffect(() => {
+    console.log("Mo&An Website Loaded - Version: Updated Layout");
+  }, []);
 
   const addToCart = (productId: string) => {
     setCartItems(prev => {
