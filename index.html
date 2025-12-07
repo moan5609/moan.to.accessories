@@ -1,12 +1,77 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8" />
-  <title>MO&AN 測試首頁</title>
-</head>
-<body>
-  <h1>這是 MO&AN 測試首頁</h1>
-  <p>如果你看得到這段文字，代表 GitHub Pages ＋ Jekyll 部署是正常的。</p>
-  <p>接下來我們就可以放心換成真正的官網版面。</p>
-</body>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MO&AN 默安飾品 | Moment & Another</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                bg: '#FAF9F6', // Off-white / Alabaster
+                text: '#4A4A4A', // Dark Grey
+                muted: '#8C8C8C', // Light Grey
+                gold: '#C5A065', // Muted Gold
+                cream: '#F5F0EB', // Light Cream
+                milktea: '#A89078', // Milk Tea
+              }
+            },
+            fontFamily: {
+              serif: ['"Times New Roman"', 'Times', 'serif'],
+              sans: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #FAF9F6; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #E5E5E5; 
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #C5A065; 
+      }
+
+      .fade-in {
+        animation: fadeIn 1s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      /* Utilities */
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+  </head>
+  <body class="bg-brand-bg text-brand-text antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
